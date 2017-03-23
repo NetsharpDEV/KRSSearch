@@ -243,3 +243,4 @@ ModelManifest.xml
 ConsoleApplication1/
 DataAccessLayer/Data/data.json
 KRSSearch.Logic/Data/data.json
+KRSSearch.DataAccessLayer/Data/data.json
