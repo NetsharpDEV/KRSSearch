@@ -35,7 +35,7 @@
         <TextBlock x:Name="textBlockRegon" HorizontalAlignment="Left" Margin="932,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="REGON:"/><LineBreak/><Run/></TextBlock>
         <TextBox x:Name="textBoxRegon" HorizontalAlignment="Left" Height="23" Margin="984,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
         <TextBlock x:Name="textBlokRegistrationDate" HorizontalAlignment="Left" Margin="119,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Data rejestracji:"/><LineBreak/><Run/></TextBlock>
-        <DatePicker HorizontalAlignment="Left" Margin="211,74,0,0" VerticalAlignment="Top" ToolTip="Wybierz minimalną datę rejestracji" Width="130"/>
+        <DatePicker HorizontalAlignment="Left" x:Name="DateRegistration" Margin="211,74,0,0" VerticalAlignment="Top" ToolTip="Wybierz minimalną datę rejestracji" Width="130"/>
         <TextBlock x:Name="textBlockRepresentation" HorizontalAlignment="Left" Margin="356,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Organ reprezentacji:"/><LineBreak/><Run/></TextBlock>
         <ComboBox x:Name="representationCombo" HorizontalAlignment="Left" Margin="470,74,0,0" VerticalAlignment="Top" Width="160                   "/>
     </Grid>

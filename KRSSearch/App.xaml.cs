@@ -42,7 +42,7 @@ namespace KRSSearch
         private void ComponeObjects()
         {
             Current.MainWindow = this.container.Get<MainWindow>();
-            Current.MainWindow.Title = "KRS - search tool";
+            Current.MainWindow.Title = "KRS - search tool v.0.2 BETA";
         }
 
     }

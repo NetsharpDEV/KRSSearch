@@ -48,6 +48,7 @@
     <Compile Include="Repositories\AssociationRepository\IAssociationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\KRSItemModel.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

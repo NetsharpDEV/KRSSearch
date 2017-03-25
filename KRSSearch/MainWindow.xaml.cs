@@ -44,11 +44,11 @@ namespace KRSSearch
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            var associationData = _associationRepo.GetData();
-            dataGrid.DataContext = associationData;
-            _headquarterList = associationData.Select(x => x.HeadQuarter).Distinct().ToList();
-            _representativesList = associationData.Select(x => x.RepresentationName).Distinct().ToList();
-            _legalFormList = associationData.Select(x => x.LegalForm).Distinct().ToList();
+            _associationData = _associationRepo.GetData();
+            dataGrid.DataContext = _associationData;
+            _headquarterList = _associationData.Select(x => x.HeadQuarter).Distinct().ToList();
+            _representativesList = _associationData.Select(x => x.RepresentationName).Distinct().ToList();
+            _legalFormList = _associationData.Select(x => x.LegalForm).Distinct().ToList();
             initComboboxValues();
         }
         private void initComboboxValues()
@@ -96,17 +96,50 @@ namespace KRSSearch
         }
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            var emailComboValue = emailCombo.SelectedValue;
-            var wwwComboValue = webSiteCombo.SelectedValue;
-            var headquarterValue = comboHeadQuarter.SelectedValue;
-            var legalFormVal = legalFormCombo.SelectedValue;
-            var representativeVal = representationCombo.SelectedValue;
+            var emailComboValue = (KeyValuePair<EmailStatus, string>)emailCombo.SelectedValue;
+            var wwwComboValue = (KeyValuePair<WebSiteStatus, string>)webSiteCombo.SelectedValue;
+            var headquarterValue = comboHeadQuarter.SelectedValue.ToString();
+            var legalFormVal = legalFormCombo.SelectedValue.ToString();
+            var representativeVal = representationCombo.SelectedValue.ToString();
             var searchName = textBoxName.Text;
-            var searchRegon = textBoxRegon;
+            var searchRegon = textBoxRegon.Text;
+            var datePickerVal = DateRegistration.SelectedDate;
+
+            dataGrid.DataContext = FilterData(emailComboValue.Key, wwwComboValue.Key, headquarterValue, legalFormVal, representativeVal, searchName, searchRegon, datePickerVal);
         }
-        private List<KRSItemModel> FilterData(string email, string www, string headquarter, string legalForm, string representative, string name, string regon, DateTime date)
-        {            
-            return _associationData.Where(x => x.Email == email && x.Name == name && x.HeadQuarter == headquarter && x.LegalForm == legalForm && x.RepresentationName == representative && x.Regon == regon).ToList();
+        private List<KRSItemModel> FilterData(EmailStatus email, WebSiteStatus www, string headquarter, string legalForm, string representative, string name, string regon, DateTime? date)
+        {
+            List<KRSItemModel> list = _associationData;
+            if (email == EmailStatus.WithEmail)
+                list = list.Where(x => x.Email != string.Empty && x.Email != null).ToList();
+            if (email == EmailStatus.WithoutEmail)
+                list = list.Where(x => x.Email == string.Empty || x.Email == null).ToList();
+
+            if (www == WebSiteStatus.WithWWW)
+                list = list.Where(x => x.WebSite != string.Empty && x.WebSite != null).ToList();
+            if (www == WebSiteStatus.WithoutWWW)
+                list = list.Where(x => x.WebSite == string.Empty || x.WebSite == null).ToList();
+
+            if (!string.IsNullOrEmpty(headquarter) && headquarter != "Wszystkie")
+                list = list.Where(x => x.HeadQuarter == headquarter).ToList();
+
+            if (!string.IsNullOrEmpty(legalForm) && legalForm != "Wszystkie")
+                list = list.Where(x => x.LegalForm == legalForm).ToList();
+
+            if (!string.IsNullOrEmpty(representative) && representative != "Wszystkie")
+                list = list.Where(x => x.RepresentationName == representative).ToList();
+
+            if (!string.IsNullOrEmpty(name))
+                list = list.Where(x => x.Name.ToUpper() == name.ToUpper()).ToList();
+
+            if (!string.IsNullOrEmpty(regon))
+                list = list.Where(x => x.Regon.ToUpper() == regon.ToUpper()).ToList();
+
+
+            return list;
+
+
+
         }
     }
 }
