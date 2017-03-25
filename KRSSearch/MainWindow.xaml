@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KRSSearch"
         mc:Ignorable="d"
-        Title="MainWindow" Height="527.6" Width="791.4">
+        Title="KRS Search tool" Height="760" Width="1280">
     <Grid>
-
+        <DataGrid x:Name="dataGrid"  ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="10,116,9.6,10.4" IsSynchronizedWithCurrentItem="True" RenderTransformOrigin="0.5,0.5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Width="50" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Width="300" Header="Nazwa"/>
+                <DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Width="150" Header="Email"/>
+                <DataGridTextColumn Binding="{Binding WebSite}" ClipboardContentBinding="{x:Null}" Width="150" Header="Strona www"/>
+                <DataGridTextColumn Binding="{Binding HeadQuarter}" ClipboardContentBinding="{x:Null}" Width="360" Header="Siedziba"/>
+                <DataGridTextColumn Binding="{Binding Regon}" ClipboardContentBinding="{x:Null}" Width="120" Header="Regon"/>
+                <DataGridTextColumn Binding="{Binding LegalForm}" ClipboardContentBinding="{x:Null}" Width="120" Header="Forma prawna"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="emailCombo" HorizontalAlignment="Left" Margin="211,10,0,0" VerticalAlignment="Top" Width="130"/>
+        <TextBlock x:Name="textBlockEmail" HorizontalAlignment="Left" Margin="119,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Email:"/><LineBreak/><Run/></TextBlock>
+        <Button x:Name="button" Content="Szukaj" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="button_Click"/>
+        <TextBlock x:Name="textBlockWebSite" HorizontalAlignment="Left" Margin="119,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Strona WWW:"/><LineBreak/><Run/></TextBlock>
+        <ComboBox x:Name="webSiteCombo" HorizontalAlignment="Left" Margin="211,42,0,0" VerticalAlignment="Top" Width="130"/>
+        <ComboBox x:Name="voivodeShipCombo" HorizontalAlignment="Left" Margin="470,8,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBlock x:Name="textBlockVoivodeship" HorizontalAlignment="Left" Margin="356,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Województwo:"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="textBlockLegalForm" HorizontalAlignment="Left" Margin="356,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Forma prawna:"/><LineBreak/><Run/></TextBlock>
+        <ComboBox x:Name="legalFormCombo" HorizontalAlignment="Left" Margin="470,42,0,0" VerticalAlignment="Top" Width="160
+                  "/>
+        <ComboBox x:Name="comboHeadQuarter" HorizontalAlignment="Left" Margin="716,10,0,0" VerticalAlignment="Top" Width="396"/>
+        <TextBlock x:Name="textBlockHeadQuarter" HorizontalAlignment="Left" Margin="644,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Siedziba:"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="textBlockName" HorizontalAlignment="Left" Margin="644,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Nazwa:"/><LineBreak/><Run/></TextBlock>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="716,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <TextBlock x:Name="textBlockRegon" HorizontalAlignment="Left" Margin="932,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="REGON:"/><LineBreak/><Run/></TextBlock>
+        <TextBox x:Name="textBoxRegon" HorizontalAlignment="Left" Height="23" Margin="984,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <TextBlock x:Name="textBlokRegistrationDate" HorizontalAlignment="Left" Margin="119,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Data rejestracji:"/><LineBreak/><Run/></TextBlock>
+        <DatePicker HorizontalAlignment="Left" Margin="211,74,0,0" VerticalAlignment="Top" ToolTip="Wybierz minimalną datę rejestracji" Width="130"/>
+        <TextBlock x:Name="textBlockRepresentation" HorizontalAlignment="Left" Margin="356,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Organ reprezentacji:"/><LineBreak/><Run/></TextBlock>
+        <ComboBox x:Name="representationCombo" HorizontalAlignment="Left" Margin="470,74,0,0" VerticalAlignment="Top" Width="160                   "/>
     </Grid>
 </Window>

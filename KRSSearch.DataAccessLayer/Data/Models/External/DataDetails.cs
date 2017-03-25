@@ -22,5 +22,13 @@ namespace KRSSearch.DataAccessLayer.Data.Models
         public string Email { get; set; }
         [JsonProperty("krs_podmioty.www")]
         public string WebSite { get; set; }
+        [JsonProperty("krs_podmioty.regon")]
+        public string Regon { get; set; }
+        [JsonProperty("krs_podmioty.data_rejestracji")]
+        public DateTime RegistrationDate { get; set; }
+        [JsonProperty("krs_podmioty.adres_kraj")]
+        public string Country { get; set; }
+        [JsonProperty("krs_podmioty.wojewodztwo_id")]
+        public int VoivodeShipId { get; set; }
     }
 }

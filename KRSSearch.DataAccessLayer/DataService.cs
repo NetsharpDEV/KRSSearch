@@ -31,13 +31,21 @@ namespace KRSSearch.DataAccessLayer
                 return lastDate.UpdateDate;
             }
         }
+        public IEnumerable<AssociationModel> GetData()
+        {
+            using (var db = new LiteDatabase(DataFile))
+            {
+                var associatons = db.GetCollection<AssociationModel>("associations");
+                return associatons.FindAll();
+            }
+        }
 
         public void UpdateLastDataDownload()
         {
             using (var db = new LiteDatabase(DataFile))
             {
                 var databaseUpdates = db.GetCollection<DatabaseUpdatesModel>("DatabaseUpdates");
-                databaseUpdates.Insert(new DatabaseUpdatesModel() { UpdateDate = DateTime.Now});
+                databaseUpdates.Insert(new DatabaseUpdatesModel() { UpdateDate = DateTime.Now });
             }
         }
         public void InsertOnLoad(List<AssociationModel> data)
@@ -47,6 +55,14 @@ namespace KRSSearch.DataAccessLayer
                 var associatons = db.GetCollection<AssociationModel>("associations");
 
                 associatons.Insert(data);
+            }
+        }
+        public void DeleteDataOnLoad()
+        {
+            using (var db = new LiteDatabase(DataFile))
+            {
+                if(db.CollectionExists("associations"))
+                    db.DropCollection("associations");
             }
         }
     }

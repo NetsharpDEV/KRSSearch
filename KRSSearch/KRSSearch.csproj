@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.4.0.0-beta-0134\lib\net45\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -93,6 +97,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,6 +108,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KRSSearch.DataAccessLayer\KRSSearch.DataAccessLayer.csproj">
+      <Project>{5153623A-4692-49C2-9E54-8E41755A1871}</Project>
+      <Name>KRSSearch.DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KRSSearch.Logic\KRSSearch.Logic.csproj">
       <Project>{e7c8fb88-4c99-425f-83c9-8dd8adba3d56}</Project>
       <Name>KRSSearch.Logic</Name>

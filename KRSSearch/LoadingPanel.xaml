@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KRSSearch"
         mc:Ignorable="d"
-        Title="LoadingPanel" Height="300" Width="300">
+        Title="Wczytywanie..." Height="300" Width="300">
     <Grid>
-        <ProgressBar HorizontalAlignment="Left" Height="25" Margin="55,109,0,0" VerticalAlignment="Top" Width="184"/>
-
+        <Label x:Name="label" Content="&#x9;PROSZĘ CZEKAĆ,&#xA;TRWA WCZYTYWANIE DANYCH..." HorizontalAlignment="Left" Margin="45,95,0,0" VerticalAlignment="Top" Height="60" Width="201"/>
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
 ﻿using DataAccessLayer;
 using KRSSearch.DataAccessLayer;
 using KRSSearch.DataAccessLayer.Data.Models;
-using KRSSearch.Logic.Data.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,18 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using KRSSearch.Logic.Models;
 
 namespace KRSSearch.Logic
 {
-    public class AssociationRepository
+    public class AssociationRepository : IAssociationRepository
     {
+        private DataService _dataService;
+
+        public AssociationRepository(DataService dataService)
+        {
+            _dataService = dataService;
+        }
         private List<AssociationModel> ConvertJsonDataToModel(string data)
         {
             var objectJson = JsonConvert.DeserializeObject<DataAccessLayer.Data.Models.RootObject>(data);
@@ -40,11 +46,10 @@ namespace KRSSearch.Logic
         }
         public void UpdateDatabaseFromAPI()
         {
-
-            DataService dataService = new DataService();
-            if (dataService.GetLastDatabaseUpdateDate().AddDays(5) < DateTime.Now)
+            if (_dataService.GetLastDatabaseUpdateDate().AddDays(5) < DateTime.Now)
             {
-                for (int i = 1; i < 200; i++)
+                _dataService.DeleteDataOnLoad();
+                for (int i = 1; i < 265; i++)
                 {
                     Uri uri = new Uri("https://api-v3.mojepanstwo.pl/dane/krs_podmioty.json?page=" + i + "&limit=1000&conditions[krs_podmioty.forma_prawna_typ_id]=2");
                     try
@@ -56,7 +61,7 @@ namespace KRSSearch.Logic
                         var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
                         var list = ConvertJsonDataToModel(responseString);
-                        dataService.InsertOnLoad(list);
+                        _dataService.InsertOnLoad(list);
 
 
                     }
@@ -66,9 +71,39 @@ namespace KRSSearch.Logic
                     }
 
                 }
-                dataService.UpdateLastDataDownload();
+                _dataService.UpdateLastDataDownload();
             }
 
+        }
+
+        public List<KRSItemModel> GetData()
+        {
+            var data = _dataService.GetData();
+            List<KRSItemModel> list = new List<KRSItemModel>();
+            foreach(var item in data)
+            {
+                list.Add(new KRSItemModel()
+                {
+                    Id = item.Id,
+                    Email = item.Email,
+                    Name = item.Name,
+                    LegalForm = item.LegalForm,
+                    HeadQuarter = item.HeadQuarter,
+                    RepresentationName = item.RepresentationName,
+                    WebSite=item.WebSite,
+                    Country = item.Country,
+                    Regon = item.Regon,
+                    RegistrationDate = item.RegistrationDate,
+                    VoivodeShipId = item.VoivodeShipId
+                });      
+            }
+            return list;
+            
+        }
+
+        public List<string> Get(FilterTypes type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KRSSearch.DataAccessLayer.Data.Models
+namespace KRSSearch.Logic.Models
 {
-    public class AssociationModel
+    public class KRSItemModel
     {
         public int Id { get; set; }
-        public int BaseId { get; set; }
         public string RepresentationName { get; set; }
         public string LegalForm { get; set; }
         public string HeadQuarter { get; set; }
@@ -21,6 +20,29 @@ namespace KRSSearch.DataAccessLayer.Data.Models
         public DateTime RegistrationDate { get; set; }
         public string Country { get; set; }
         public int VoivodeShipId { get; set; }
-
+    }
+    public enum EmailStatus
+    {
+        [Description("Wszystkie")]
+        All = 0,
+        [Description("Tylko z adresem email")]
+        WithEmail = 1,
+        [Description("Tylko bez adresu email")]
+        WithoutEmail = 2,
+    }
+    public enum WebSiteStatus
+    {
+        [Description("Wszystkie")]
+        All = 0,
+        [Description("Tylko ze adresem www")]
+        WithWWW = 1,
+        [Description("Tylko bez adresu www")]
+        WithoutWWW = 2,
+    }
+    public enum FilterTypes
+    {
+        HeadQuarters=0,
+        LegalForms,
+        RepresentationName
     }
 }
